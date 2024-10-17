@@ -1,6 +1,6 @@
 @extends('layout.main')
 
-@section('title', 'Edit User')
+@section('title', 'Edit Category')
 
 @section('content')
 <div class="container-fluid">
