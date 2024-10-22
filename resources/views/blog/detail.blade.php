@@ -1,43 +1,65 @@
 @extends('layout.app')
 
-@section('title', 'Blog Post - Start Bootstrap Template')
-@section('content')
-<div class="container">
-    <article>
-        <header class="mb-4">
-            <h1 class="fw-bolder mb-1">Welcome to Blog Post!</h1>
-            <div class="text-muted fst-italic mb-2">Posted on January 1, 2023 by Start Bootstrap</div>
-            <a class="badge bg-secondary text-decoration-none link-light" href="#!">Web Design</a>
-            <a class="badge bg-secondary text-decoration-none link-light" href="#!">Freebies</a>
-        </header>
-        <figure class="mb-4"><img class="img-fluid rounded" src="https://dummyimage.com/900x400/ced4da/6c757d.jpg"
-                alt="..." /></figure>
-        <section class="mb-5">
-            <p class="fs-5 mb-4">Science is an enterprise that should be cherished as an activity of the free human
-                mind...</p>
-            <p class="fs-5 mb-4">The universe is large and old, and the ingredients for life as we know it are
-                everywhere...</p>
-            <h2 class="fw-bolder mb-4 mt-5">I have odd cosmic thoughts every day</h2>
-            <p class="fs-5 mb-4">For me, the most fascinating interface is Twitter. I have odd cosmic thoughts every day
-                and I realized I could share them...</p>
-        </section>
-    </article>
+@section('title', $post->title)
 
-    <section class="mb-5">
-        <div class="card bg-light">
-            <div class="card-body">
-                <form class="mb-4"><textarea class="form-control" rows="3"
-                        placeholder="Join the discussion and leave a comment!"></textarea></form>
-                <div class="d-flex mb-4">
-                    <div class="flex-shrink-0"><img class="rounded-circle"
-                            src="https://dummyimage.com/50x50/ced4da/6c757d.jpg" alt="..." /></div>
-                    <div class="ms-3">
-                        <div class="fw-bold">Commenter Name</div>
-                        This is an example comment for the blog post.
+@section('content')
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-lg-12">
+            <!-- Blog Post Detail -->
+            <div class="card mb-4">
+                <!-- Post Image -->
+                @if($post->image)
+                <img class="card-img-top" src="{{ asset('images/' . $post->image) }}" alt="{{ $post->title }}">
+                @endif
+
+                <!-- Card Body -->
+                <div class="card-body">
+                    <!-- Post Title -->
+                    <h1 class="card-title fw-bold">{{ $post->title }}</h1>
+
+                    <!-- Post Meta -->
+                    <div class="text-muted mb-3">
+                        <small>
+                            Posted on {{ $post->created_at->format('F j, Y') }} 
+                            by {{ $post->author }}
+                        </small>
+                        @if($post->category)
+                            <span class="badge bg-primary ms-2">{{ $post->category->name }}</span>
+                        @endif
                     </div>
+
+                    <!-- Post Content -->
+                    <section class="mb-4">
+                        <p class="fs-5">{{ $post->content }}</p>
+                    </section>
+
+                    <!-- Back Button -->
+                    <a href="{{ route('blog') }}" class="btn btn-secondary">Back to Blog</a>
+                </div>
+            </div>
+
+            <!-- Recent Posts -->
+            <div class="mt-5">
+                <h3>Recent Posts</h3>
+                <div class="row">
+                    @foreach($recentPosts as $recent)
+                        <div class="col-md-4 mb-4">
+                            <div class="card h-100">
+                                <a href="{{ route('blog-show', $recent->id) }}">
+                                    <img class="card-img-top" src="{{ asset('images/' . $recent->image) }}" alt="{{ $recent->title }}">
+                                </a>
+                                <div class="card-body">
+                                    <div class="small text-muted">{{ $recent->created_at->format('F j, Y') }}</div>
+                                    <h4 class="card-title">{{ $recent->title }}</h4>
+                                    <a href="{{ route('blog-show', $recent->id) }}" class="btn btn-primary">Read more →</a>
+                                </div>
+                            </div>
+                        </div>
+                    @endforeach
                 </div>
             </div>
         </div>
-    </section>
+    </div>
 </div>
 @endsection

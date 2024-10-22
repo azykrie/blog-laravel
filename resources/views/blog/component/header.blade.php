@@ -7,7 +7,9 @@
         <div class="position-absolute top-50 start-50 translate-middle text-center text-white"
             style="padding: 20px; border-radius: 10px;">
             <h1 class="fw-bolder">Welcome to Blog Home!</h1>
-            <p class="lead mb-0">A Bootstrap 5 starter layout for your next blog homepage</p>
+            <p class="lead mb-0">Lorem ipsum dolor sit amet consectetur adipisicing elit. Perspiciatis molestiae minus
+                odit accusantium repellendus et expedita est dolorum placeat odio enim atque voluptatibus vel quisquam,
+                laborum magnam. Fugiat, facilis dolor?</p>
         </div>
     </header>
     @endif
